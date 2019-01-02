@@ -1,3 +1,4 @@
 from django.contrib import admin
+from rgnbgn.models import Doc
 
-# Register your models here.
+admin.site.register(Doc)
