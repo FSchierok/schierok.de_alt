@@ -1,13 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse, FileResponse, Http404
+from rgnbgn.models import Doc
 
 
 def index(request):
-    try:
-        response = HttpResponse(open("rgnbgn/html/rgnbgn.html"))
-        return response
-    except FileNotFoundError:
-        raise Http404()
+    return render(request, "rgnbgn/rgnbgn.html", {"entries": Doc.objects.all()})
 
 
 def overpass(request):
@@ -41,8 +38,8 @@ def overpass_HD(request):
 def inferno(request):
     try:
         response = FileResponse(
-            open("rgnbgn/inferno.pdf","rb"), content_type="application/pdf")
-        response["Content-Disposition"]= "attachment; filename=inferno.pdf"
+            open("rgnbgn/inferno.pdf", "rb"), content_type="application/pdf")
+        response["Content-Disposition"] = "attachment; filename=inferno.pdf"
         return response
     except FileNotFoundError:
         raise Http404()
@@ -51,8 +48,8 @@ def inferno(request):
 def train(request):
     try:
         response = FileResponse(
-            open("rgnbgn/train.pdf","rb"), content_type="application/pdf")
-        response["Content-Disposition"]= "attachment; filename=train.pdf"
+            open("rgnbgn/train.pdf", "rb"), content_type="application/pdf")
+        response["Content-Disposition"] = "attachment; filename=train.pdf"
         return response
     except FileNotFoundError:
         raise Http404()
