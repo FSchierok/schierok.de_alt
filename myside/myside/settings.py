@@ -23,14 +23,15 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = open("myside/key.txt").read()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ["www.schierok.de","93.90.202.57"]
+ALLOWED_HOSTS = ["www.schierok.de", "93.90.202.57", "127.0.0.1"]
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    "tippspiel",
     "rgnbgn",
     'django.contrib.admin',
     'django.contrib.auth',
@@ -119,3 +120,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "data/")
+MEDIA_URL = "myside/data/"
