@@ -31,7 +31,6 @@ ALLOWED_HOSTS = ["www.schierok.de", "93.90.202.57", "127.0.0.1"]
 # Application definition
 
 INSTALLED_APPS = [
-    "tippspiel",
     "rgnbgn",
     'django.contrib.admin',
     'django.contrib.auth',
