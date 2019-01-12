@@ -25,13 +25,15 @@ SECRET_KEY = open("myside/key.txt").read()
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["www.schierok.de", "93.90.202.57", "127.0.0.1"]
+ALLOWED_HOSTS = ["www.schierok.de",
+                 "93.90.202.57", "127.0.0.1", "192.168.2.108"]
 
 
 # Application definition
 
 INSTALLED_APPS = [
     "rgnbgn",
+    "tippspiel",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -117,6 +119,8 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
+
+LOGIN_REDIRECT_URL = '/tippspiel/'
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")

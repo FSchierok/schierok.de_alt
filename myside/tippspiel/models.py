@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Event(models.Model):
@@ -14,15 +15,15 @@ class Match(models.Model):
     result2 = models.IntegerField()
     id = models.IntegerField(primary_key=True)
     event = models.ForeignKey("Event", on_delete=models.CASCADE)
-
-
-class User(models.Model):
-    nick = models.CharField(max_length=64)
-    salt = models.CharField(max_length=64)
-    hash = models.CharField(max_length=64)
+    url = models.URLField()
 
 
 class Tip(models.Model):
     match = models.ForeignKey("Match", on_delete=models.CASCADE)
-    user = models.ForeignKey("User", on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     tip = models.BooleanField()
+
+
+class Profil(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    points = models.IntegerField()

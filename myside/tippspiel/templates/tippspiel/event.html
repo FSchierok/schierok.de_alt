@@ -5,27 +5,42 @@
 </head>
 
 <body>
-    {{title}}
-    <table class="table">
-        <tr>
-            <th>Team 1</th>
-            <th>Pick</th>
-            <td>Team 2</td>
-        </tr>
-        {% for match in matches %}
-        <tr>
-            <td>{{match.team1}}</td>
-            <td>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="{{match.id}}" value="team1">
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="{{match.id}}" value="team2">
-                </div>
-            </td>
-            <td>{{match.team2}}</td>
-        </tr>
-        {% endfor %}
-    </table>
-    <button type="submit" class="btn btn-primary">Speichern</button>
+    <h1 class="display-4">{{title}}</h1>
+    <small id="emailHelp" class="form-text text-muted">{{username}} Punkte: {{points}}</small>
+    <form action="?" method="POST">
+        {% csrf_token %}
+        <table class="table">
+            <tr>
+                <th>Team 1</th>
+                <th>Pick</th>
+                <th>Team 2</th>
+            </tr>
+            {% for match in matches %}
+            <tr>
+                <td>{{match.team1}}</td>
+                <td>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="{{match.id}}.0" value="team1">
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="{{match.id}}.1" value="team2">
+                    </div>
+                </td>
+                <td>{{match.team2}}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td colspan="3">Beendet</td>
+            </tr>
+            {% for match in result %}
+            <tr>
+                <td>{{match.team1}}</td>
+                <td>{{match.result1}}|{{match.result2}}</td>
+                <td>{{match.team2}}</td>
+            </tr>
+            {% endfor %}
+
+        </table>
+        <button type="submit" class="btn btn-primary">Speichern</button>
+    </form>
 </body>

@@ -14,17 +14,21 @@ def getSoup(url):
 def newEvent(url):
     pattern = compile(r"https://www\.hltv\.org/events/\d{4}/.+")
     if pattern.match(url):
-        soup = getSoup(url)
-        name = soup.find("div", class_="eventname").text
-        id = soup.find("a", class_="event-nav active")["href"].split("/")[2]
-        return name, id
+        try:
+            soup = getSoup(url)
+            name = soup.find("div", class_="eventname").text
+            id = soup.find(
+                "a", class_="event-nav active")["href"].split("/")[2]
+            return name, id
+        except:
+            return ("", -1)
+
     else:
         return ("", -1)
 
 
 def getMatches(id):
     url = f"https://www.hltv.org/matches?event={id}"
-    print(url)
     soup = getSoup(url)
     matches = list()
     for match in soup.find_all("a", class_="a-reset block upcoming-match standard-box"):
@@ -49,4 +53,4 @@ def getMatch(url):
     id = url.split("/")[4]
     team1 = soup.find("div", class_="team1-gradient").div.get_text()
     team2 = soup.find("div", class_="team2-gradient").div.get_text()
-    return team1, team2, id
+    return {"team1": team1, "team2": team2, "id": id}

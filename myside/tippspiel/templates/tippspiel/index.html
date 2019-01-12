@@ -11,15 +11,19 @@
         <hr class="my-4">
         <p>Klicke auf ein event um es anzusehen oder lege ein neues an.</p>
         <p class="lead">
-            <a class="btn btn-primary btn-lg" href="newevent" role="button">Neu</a>
+            <form action="/tippspiel" method="GET">
+                <div class="form-group">
+                    <label for="url">HLTV Url</label>
+                    <input type="url" name="url" class="form-control" id="url" aria-describedby="urlHelp">
+                    <small id="urlHelp" class="form-text text-muted">HLTV URL, zB:
+                        https://www.hltv.org/events/4208/europe-minor-iem-katowice-2019.</small>
+                </div>
+                <button type="submit" class="btn btn-primary">Neu</button>
+            </form>
         </p>
     </div>
     <h3 class="display-4">Laufend</h3>
     {% for event in running %}
-    <a class="btn btn-primary" href="{{event.url}}" role="button">{{event.title}}</a>
-    {% endfor %}
-    <h3 class="display-4">Beendet</h3>
-    {% for event in finished %}
-    <a class="btn btn-secondary" href="{{event.url}}" role="button">{{event.title}}</a>
+    <a class="btn btn-primary" href="/tippspiel/event/{{event.id}}" role="button">{{event.title}}</a>
     {% endfor %}
 </body>
