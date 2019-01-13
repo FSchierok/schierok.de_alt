@@ -26,7 +26,7 @@ def event(request, id):  # Event anzeigen
             if key != "csrfmiddlewaretoken":
                 tip = key.split(".")
                 T = Tip(user=request.user, tip=bool(
-                    tip[1]), match=Match.objects.get(id=tip[0]))
+                    int(tip[1])), match=Match.objects.get(id=tip[0]))
                 T.save()
         event = Match.objects.filter(event__id__contains=id)
         matches = sniffer.getMatches(id)
