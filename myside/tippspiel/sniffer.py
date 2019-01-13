@@ -28,7 +28,7 @@ def newEvent(url):
 
 
 def getMatches(id):
-    url = f"https://www.hltv.org/matches?event={id}"
+    url = r"https://www.hltv.org/matches?event="+str(id)
     soup = getSoup(url)
     matches = list()
     for match in soup.find_all("a", class_="a-reset block upcoming-match standard-box"):
