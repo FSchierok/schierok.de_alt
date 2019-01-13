@@ -89,3 +89,4 @@ local_settings.py
 db.sqlite3
 key.txt
 *.pdf
+soup.html
