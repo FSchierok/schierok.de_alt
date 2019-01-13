@@ -17,8 +17,7 @@ def newEvent(url):
         try:
             soup = getSoup(url)
             name = soup.find("div", class_="eventname").text
-            id = soup.find(
-                "a", class_="event-nav active")["href"].split("/")[2]
+            id = url.split("/")[4]
             return name, id
         except:
             return ("", -1)
