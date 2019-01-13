@@ -24,6 +24,7 @@ class Tip(models.Model):
     tip = models.BooleanField()
 
 
-class Profil(models.Model):
+class Point(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    event = models.ForeignKey("Event", on_delete=models.CASCADE)
     points = models.IntegerField()
