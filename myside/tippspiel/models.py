@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 class Event(models.Model):
     title = models.CharField(max_length=128)
     id = models.IntegerField(primary_key=True)
+    finished = models.BooleanField()
 
 
 class Match(models.Model):
