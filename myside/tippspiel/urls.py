@@ -5,4 +5,5 @@ from . import views
 urlpatterns = [
     path(r"", views.index, name="Tippspiel"),
     path(r"event/<int:id>", views.event),
+    path(r"result/<int:id>", views.result),
 ]

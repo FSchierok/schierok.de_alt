@@ -11,12 +11,12 @@ def index(request):
         newEvent = sniffer.newEvent(request.GET.get("url"))
         if newEvent[1] != -1:
             if not Event.objects.filter(title=newEvent[0]).exists():
-                E = Event(title=newEvent[0], id=newEvent[1])
+                E = Event(title=newEvent[0], id=newEvent[1], finished=False)
                 E.save()
                 for user in User.objects.all():
                     P = Point(user=user, event=E, points=0)
                     P.save()
-    return render(request, "tippspiel/index.html", {"running": Event.objects.all()})
+    return render(request, "tippspiel/index.html", {"running": Event.objects.filter(finished=False), "result": Event.objects.filter(finished=True)})
 
 
 def event(request, id):  # Event anzeigen
@@ -53,3 +53,7 @@ def event(request, id):  # Event anzeigen
         return render(request, "tippspiel/event.html", {"title": Event.objects.get(id=id).title, "matches": Match.objects.filter(event__id__contains=id, finished=False), "username": request.user.get_username, "points": Point.objects.get(user=request.user, event=Event.objects.get(id=id)).points, "result": Match.objects.filter(event__id__contains=id, finished=True)})
     else:
         return redirect("/u/login")
+
+
+def result(request, id):
+    return render(request, "tippspiel/result.html", {"points": Point.objects.filter(event__id__contains=id)})

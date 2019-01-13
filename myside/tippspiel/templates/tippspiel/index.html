@@ -27,7 +27,7 @@
     <a class="btn btn-primary" href="/tippspiel/event/{{event.id}}" role="button">{{event.title}}</a>
     {% endfor %}
     <h3 class="display-4">Beendet</h3>
-    {% for event in finished %}
+    {% for event in result %}
     <a class="btn btn-primary" href="/tippspiel/result/{{event.id}}" role="button">{{event.title}}</a>
     {% endfor %}
 </body>
