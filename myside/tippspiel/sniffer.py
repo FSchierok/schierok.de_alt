@@ -17,8 +17,7 @@ def newEvent(url):
         try:
             soup = getSoup(url)
             name = soup.find("div", class_="eventname").text
-            id = soup.find(
-                "a", class_="event-nav active")["href"].split("/")[2]
+            id = url.split("/")[4]
             return name, id
         except:
             return ("", -1)
@@ -28,7 +27,7 @@ def newEvent(url):
 
 
 def getMatches(id):
-    url = f"https://www.hltv.org/matches?event={id}"
+    url = r"https://www.hltv.org/matches?event="+str(id)
     soup = getSoup(url)
     matches = list()
     for match in soup.find_all("a", class_="a-reset block upcoming-match standard-box"):
