@@ -43,7 +43,7 @@ def event(request, id):  # Event anzeigen
                     match.result2 = not bool(result[1])
                     match.save()
                     for profil in Profil.objects.all():
-                        if Tip.objects.get(user=profil.user, match=match).tip == bool(match.result1):
+                        if Tip.objects.get(user=profil.user, match=match).tip == bool(match.result2):
                             profil.points += 1
 
         return render(request, "tippspiel/event.html", {"title": Event.objects.get(id=id).title, "matches": Match.objects.filter(event__id__contains=id, finished=False), "username": request.user.get_username, "points": Profil.objects.get(user=request.user).points, "result": Match.objects.filter(event__id__contains=id, finished=True)})
