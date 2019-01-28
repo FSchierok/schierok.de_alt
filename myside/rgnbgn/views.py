@@ -4,7 +4,7 @@ from rgnbgn.models import Doc
 
 
 def index(request):
-    if request.user.groups.filter(name='beta').exists():
+    if request.user.groups.filter(name='rgnbgn').exists():
         return render(request, "rgnbgn/rgnbgn.html", {"entries": Doc.objects.all()})
     else:
         raise Http404
