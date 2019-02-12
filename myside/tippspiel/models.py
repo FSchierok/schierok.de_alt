@@ -30,9 +30,7 @@ class Tip(models.Model):
     match = models.ForeignKey("Match", on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     tip = models.BooleanField()
-    
-    def __str__(self):
-        return self.user +":_"+ self.match
+
 
 
 class Point(models.Model):
