@@ -25,7 +25,7 @@ def event(request, id):  # Event anzeigen
         for key in req.keys():
             if key != "csrfmiddlewaretoken":
                 tip = key.split(".")
-                 T = Tip.objects.filter(
+                T = Tip.objects.filter(
                     user=request.user, match=Match.objects.get(id=tip[0]).first)
                 if T == None:
                     T = Tip(user=request.user, tip=bool(
