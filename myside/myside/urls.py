@@ -25,7 +25,6 @@ urlpatterns = [
     path("tippspiel/", include("tippspiel.urls")),
     path("", views.index),
     path(r'u/', include('django.contrib.auth.urls')),
-    (r'^media/(?P.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
-
-
+    path(r"media/",'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
+ 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
