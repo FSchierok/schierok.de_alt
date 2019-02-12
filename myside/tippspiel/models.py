@@ -7,6 +7,10 @@ class Event(models.Model):
     id = models.IntegerField(primary_key=True)
     finished = models.BooleanField()
 
+    def __str__(self):
+        return self.title
+
+
 
 class Match(models.Model):
     team1 = models.CharField(max_length=64)
@@ -18,11 +22,17 @@ class Match(models.Model):
     event = models.ForeignKey("Event", on_delete=models.CASCADE)
     url = models.URLField()
 
+    def __str__(self):
+        return self.team1 + "_vs_" +self.team2
+
 
 class Tip(models.Model):
     match = models.ForeignKey("Match", on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     tip = models.BooleanField()
+    
+    def __str__(self):
+        return self.user +":_"+ self.match
 
 
 class Point(models.Model):

@@ -6,3 +6,6 @@ class Doc(models.Model):
     author = models.CharField(max_length=32)
     name = models.CharField(max_length=32)
     file = models.FileField()
+
+    def __str__(self):
+        return self.name
