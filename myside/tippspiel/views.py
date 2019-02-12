@@ -25,9 +25,14 @@ def event(request, id):  # Event anzeigen
         for key in req.keys():
             if key != "csrfmiddlewaretoken":
                 tip = key.split(".")
-                T = Tip(user=request.user, tip=bool(
-                    int(tip[1])), match=Match.objects.get(id=tip[0]))
-                T.save()
+                 T = Tip.objects.filter(
+                    user=request.user, match=Match.objects.get(id=tip[0]).first)
+                if T == None:
+                    T = Tip(user=request.user, tip=bool(
+                        int(tip[1])), match=Match.objects.get(id=tip[0]))
+                    T.save()
+                else:
+                    T.tip = bool(int([1]))
         event = Match.objects.filter(event__id__contains=id)
         matches = sniffer.getMatches(id)
         for matchURL in matches:
