@@ -50,6 +50,9 @@ def getResult(url):
 def getMatch(url):
     soup = getSoup(url)
     id = url.split("/")[4]
-    team1 = soup.find("div", class_="team1-gradient").div.get_text()
-    team2 = soup.find("div", class_="team2-gradient").div.get_text()
-    return {"team1": team1, "team2": team2, "id": id}
+    try:
+        team1 = soup.find("div", class_="team1-gradient").div.get_text()
+        team2 = soup.find("div", class_="team2-gradient").div.get_text()
+        return {"team1": team1, "team2": team2, "id": id}
+    except:
+        return{"team1": -1,"team2": -1, "id": -1}

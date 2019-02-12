@@ -32,10 +32,11 @@ def event(request, id):  # Event anzeigen
         matches = sniffer.getMatches(id)
         for matchURL in matches:
             match = sniffer.getMatch(matchURL)
-            if not Match.objects.filter(id=match["id"]):
-                M = Match(team1=match["team1"], team2=match["team2"], finished=False,
-                          id=match["id"], result1=-1, result2=-1, event=Event.objects.get(id=id), url=matchURL)
-                M.save()
+            if match["id"]!=-1:
+                if not Match.objects.filter(id=match["id"]):
+                    M = Match(team1=match["team1"], team2=match["team2"], finished=False,
+                            id=match["id"], result1=-1, result2=-1, event=Event.objects.get(id=id), url=matchURL)
+                    M.save()
         for match in event:
             if not match.finished:
                 result = sniffer.getResult(match.url)
