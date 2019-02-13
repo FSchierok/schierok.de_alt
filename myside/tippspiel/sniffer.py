@@ -46,6 +46,15 @@ def getResult(url):
         result = [False, -1]
     return result
 
+def getResults(id):
+    url =r"https://www.hltv.org/results?event="+str(id)
+    soup =getSoup(url)
+    results=list()
+    for match in soup.find_all("div", class_="team team-won"):
+        winner = match.parent["class"]=="line-align team1"
+        matchUrl=match.find_parent(div, class_="result-con").a["href"]
+        results.append([matchUrl,winner])
+    return results
 
 def getMatch(url):
     soup = getSoup(url)
