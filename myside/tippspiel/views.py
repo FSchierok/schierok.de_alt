@@ -55,6 +55,7 @@ def event(request, id):  # Event anzeigen
                         if Tip.objects.get(user=user, match=match).tip == bool(match.result2):
                             Point.objects.get(
                                 user=user, event=match.event).points += 1
+                        Point.save()
 
         return render(request, "tippspiel/event.html", {"title": Event.objects.get(id=id).title, "matches": Match.objects.filter(event__id__contains=id, finished=False), "username": request.user.get_username, "points": Point.objects.get(user=request.user, event=Event.objects.get(id=id)).points, "result": Match.objects.filter(event__id__contains=id, finished=True)})
     else:
